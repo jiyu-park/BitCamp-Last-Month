@@ -1,0 +1,71 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+public class ChiMecanim1 : MonoBehaviour
+{
+float time = 0f;
+ float exitTime = 1f;
+   public enum State{
+        doIdle,
+        doWalk,
+        doRun,
+        doGetHit
+    }
+    //동작
+
+    //State state = State.doIdle;
+
+    public Animator anim;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();//animator컴포넌트 가져오기
+        StartCoroutine("coDelay");
+    }
+
+   /* private void Update()
+    {
+        time += 0.01f;
+        
+       // ChangeMotion();
+    }*/
+
+    IEnumerator coDelay()
+    {
+
+        //Debug.Log("Test1");
+        doIdle();
+        yield return new WaitForSeconds(10.0f);//10초가 지나면 실행
+        //Debug.Log("Test2");
+        doWalk();
+
+        yield return new WaitForSeconds(10.0f);//10초가 지나면 실행
+        Debug.Log("Test3");
+        yield return new WaitForSeconds(10.0f);//10초가 지나면 실행
+
+
+
+       // ChangeMotion();//실행하고자 하는 함수
+
+    }
+  
+    public void doIdle()
+    {
+        anim.SetBool("doIdle", true);
+    }
+    public void doWalk()
+    {
+        anim.SetBool("doIdle", false);
+        anim.SetBool("doWalk", true);
+    }
+    public void doRun()
+    {
+        anim.SetBool("doRun", true);
+    }
+    public void doGetHit()
+    {
+        anim.SetBool("doGetHit", true);
+    }
+}
